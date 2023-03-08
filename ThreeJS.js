@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import WebGL from 'three/addons/capabilities/WebGL.js';
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10,);
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000,);
 scene.background = new THREE.Color("0x75d114");
 
 const renderer = new THREE.WebGLRenderer();
@@ -41,3 +41,9 @@ if (WebGL.isWebGLAvailable()) {
     const warning = WebGL.getWebGLErrorMessage();
     document.getElementById('container').appendChild(warning);
 }
+
+window.addEventListener("resize", () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
